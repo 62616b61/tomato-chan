@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const config = require('./config.json');
 const { hasPrefix, removePrefix } = require('./utils/prefix');
+const { handleStartCommand } = require('./libs/pomodoro');
 
 const client = new Discord.Client();
 
@@ -14,6 +15,10 @@ client.on('message', (message) => {
   if (!hasPrefix(content)) return;
 
   const command = removePrefix(content);
+
+  if (command === 'start') {
+    handleStartCommand(channel);
+  }
 
   if (command === 'ping') {
     channel.send('Pong.');
