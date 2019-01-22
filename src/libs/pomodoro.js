@@ -12,7 +12,7 @@ const STATE = {
 }
 
 let state = STATE.IDLE;
-let session = 0;
+let session = 1;
 let timer = null;
 
 function handleStartCommand(channel) {
@@ -20,10 +20,10 @@ function handleStartCommand(channel) {
    * If state is IDLE or BREAK_ENDED, then begin work session.
    */
   if (state === STATE.IDLE || state === STATE.BREAK_ENDED) {
-    channel.send('Starting work session!')
+    channel.send(`Starting work session #${session}!`)
     setWorkSessionTimer(() => {
       state = STATE.SESSION_ENDED;
-      channel.send('Work session has ended. Write "tomato start" to start break.');
+      channel.send(`Work session #${session} has ended. Write "tomato start" to start break.`);
     });
   }
 
@@ -31,16 +31,16 @@ function handleStartCommand(channel) {
    * If state is SESSION_ENDED, then begin break.
    */
   if (state === STATE.SESSION_ENDED) {
+    session++;
     channel.send('Starting break!')
     setBreakTimer(() => {
       state = STATE.BREAK_ENDED;
-      channel.send('Break has ended. Write "tomato start" to start work session.');
+      channel.send(`Break has ended. Write "tomato start" to start work session #${session}.`);
     });
   }
 }
 
 function setWorkSessionTimer(callback) {
-  session++;
   state = STATE.SESSION_IN_PROGRESS;
   timer = setTimeout(callback, WORK_SESSION_DURATION);
 }
