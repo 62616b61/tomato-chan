@@ -25,6 +25,10 @@ client.on('message', (message) => {
     channel.send('Pong.');
   }
 
+  if (command === 'hi') {
+    channel.send('Hi-ya~');
+  }
+
   if (command === 'bye') {
     channel.send('Bye-bye!');
   }
