@@ -1,7 +1,8 @@
 const Discord = require('discord.js');
-const config = require('./config.json');
 const { hasPrefix, removePrefix } = require('./utils/prefix');
 const { handleStartCommand } = require('./libs/pomodoro');
+
+const TOKEN = process.env.TOKEN;
 
 const client = new Discord.Client();
 

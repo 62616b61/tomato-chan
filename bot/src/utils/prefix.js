@@ -1,11 +1,11 @@
-const { prefix } = require('../config.json');
+const PREFIX = 'tomato ';
 
 function hasPrefix(string) {
-  return string.startsWith(prefix);
+  return string.startsWith(PREFIX);
 }
 
 function removePrefix(string) {
-  return string.replace(prefix, '');
+  return string.replace(PREFIX, '');
 }
 
 module.exports = {
