@@ -4,4 +4,4 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: ["push", "gcr.io/$PROJECT_ID/tomato-chan"]
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['beta', 'compute', 'instance-groups', 'managed', 'rolling-action', 'replace', 'tomato-chan-group', '--zone', 'europe-west2-c']
+  args: ['beta', 'compute', 'instance-groups', 'managed', 'rolling-action', 'replace', 'tomato-chan-group', '--max-unavailable', '0', '--zone', 'europe-west2-c']
