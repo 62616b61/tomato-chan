@@ -1,7 +1,7 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: [ 'build', '-t', 'gcr.io/$PROJECT_ID/tomato-chan', './bot' ]
+- name: 'gcr.io/cloud-builders/docker'
+  args: ["push", "gcr.io/$PROJECT_ID/tomato-chan"]
 - name: 'gcr.io/cloud-builders/gcloud'
   args: ['beta', 'compute', 'instance-groups', 'managed', 'rolling-action', 'replace', 'tomato-chan-group', '--zone', 'europe-west2-c']
-images:
-- 'gcr.io/$PROJECT_ID/tomato-chan'
