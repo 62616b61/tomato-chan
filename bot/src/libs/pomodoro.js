@@ -33,6 +33,7 @@ async function handleStartCommand(channel) {
 
     const data = JSON.stringify({
       type: 'session',
+      channel: channel.id,
       duration: WORK_SESSION_DURATION,
     });
     const dataBuffer = Buffer.from(data);
@@ -54,6 +55,7 @@ async function handleStartCommand(channel) {
 
     const data = JSON.stringify({
       type: 'break',
+      channel: channel.id,
       duration: BREAK_DURATION,
     });
     const dataBuffer = Buffer.from(data);
