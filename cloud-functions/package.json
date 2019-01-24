@@ -1,0 +1,17 @@
+{
+  "name": "tomato-chan-cloud-functions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "request": "^2.88.0",
+    "serverless-google-cloudfunctions": "^2.3.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "deploy": "serverless deploy"
+  },
+  "keywords": [],
+  "author": "whynotcrybot",
+  "license": "ISC"
+}

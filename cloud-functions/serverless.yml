@@ -1,0 +1,25 @@
+service: tomato-chan-service
+
+provider:
+  name: google
+  runtime: nodejs8
+  project: tomato-chan
+  region: europe-west1
+
+plugins:
+  - serverless-google-cloudfunctions
+
+package:
+  exclude:
+    - node_modules/**
+    - .gitignore
+    - .git/**
+    - keyfile.json
+
+functions:
+  test:
+    handler: test
+    events:
+      - event:
+          eventType: providers/cloud.pubsub/eventTypes/topic.publish
+          resource: projects/tomato-chan/topics/session-start
