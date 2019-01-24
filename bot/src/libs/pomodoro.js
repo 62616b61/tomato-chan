@@ -1,5 +1,8 @@
-const WORK_SESSION_DURATION = 30 * 60 * 1000; // 30 minutes
-const BREAK_DURATION = 10 * 60 * 1000; // 10 minutes
+const { PubSub } = require('@google-cloud/pubsub');
+
+const START_PERIOD_TOPIC = 'start-period';
+const WORK_SESSION_DURATION = 30 * 1000; // 30 minutes
+const BREAK_DURATION = 10 * 1000; // 10 minutes
 const LONG_BREAK_DURATION = 20 * 60 * 1000; // 20 minutes
 const SESSION_BEFORE_LONG_BREAK = 4;
 
@@ -10,6 +13,8 @@ const STATE = {
   BREAK_IN_PROGRESS: 3,
   BREAK_ENDED: 3,
 }
+
+const pubsub = new PubSub();
 
 let state = STATE.IDLE;
 let session = 1;
@@ -25,6 +30,14 @@ function handleStartCommand(channel) {
       state = STATE.SESSION_ENDED;
       channel.send(`Work session #${session} has ended. Write "tomato start" to start break.`);
     });
+
+    const data = JSON.stringify({
+      type: 'session',
+      duration: WORK_SESSION_DURATION,
+    });
+
+    const messageId = await pubsub.topic(START_PERIOD_TOPIC).publish(data);
+    console.log(`Start session message ${messageId} published.`);
   }
 
   /*
@@ -37,6 +50,14 @@ function handleStartCommand(channel) {
       state = STATE.BREAK_ENDED;
       channel.send(`Break has ended. Write "tomato start" to start work session #${session}.`);
     });
+
+    const data = JSON.stringify({
+      type: 'break',
+      duration: BREAK_DURATION,
+    });
+
+    const messageId = await pubsub.topic(START_PERIOD_TOPIC).publish(data);
+    console.log(`Start break message ${messageId} published.`);
   }
 }
 
