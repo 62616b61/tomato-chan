@@ -3,13 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "dependencies": {
-    "request": "^2.88.0",
-    "serverless-google-cloudfunctions": "^2.3.2"
-  },
-  "devDependencies": {
-    "serverless": "^1.36.3"
-  },
   "scripts": {
     "deploy": "serverless deploy"
   },
