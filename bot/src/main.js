@@ -14,6 +14,8 @@ client.on('ready', () => {
 client.on('message', async (message) => {
   const { content, channel } = message;
 
+  console.log('CHANNEL', channel)
+
   if (!hasPrefix(content)) return;
 
   const command = removePrefix(content);
