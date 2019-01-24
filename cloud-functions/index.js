@@ -1,5 +1,7 @@
-exports.test = (event, callback) => {
+exports.startPeriod = (event, callback) => {
   const pubsubMessage = event.data;
-  console.log('test', Buffer.from(pubsubMessage.data, 'base64').toString());
+
+  console.log('INCOMING DATA', Buffer.from(pubsubMessage.data, 'base64').toString());
+
   callback();
 };

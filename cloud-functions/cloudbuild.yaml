@@ -7,6 +7,6 @@ steps:
   args:
   - functions
   - deploy
-  - test
+  - startPeriod
   - --source=.
-  - --trigger-topic=session-start
+  - --trigger-topic=start-period
