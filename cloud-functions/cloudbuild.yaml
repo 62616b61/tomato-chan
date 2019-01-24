@@ -3,5 +3,10 @@ steps:
   args: ['install']
   dir: 'cloud-functions'
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['functions', 'deploy', 'test', '--source=.', '--trigger-topic=session-start']
-	dir: 'cloud-functions'
+  dir: 'cloud-functions'
+  args:
+  - functions
+  - deploy
+  - test
+  - --source=.
+  - --trigger-topic=session-start
