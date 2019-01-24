@@ -5,3 +5,5 @@ steps:
 - name: 'gcr.io/cloud-builders/npm'
   args: ['run', 'deploy']
   dir: 'cloud-functions'
+  env:
+  - 'SLS_DEBUG=*'
