@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const { hasPrefix, removePrefix } = require('./utils/prefix');
 const { handleStartCommand } = require('./libs/pomodoro');
+const { version } = require('../package.json');
 
 const TOKEN = process.env.TOKEN;
 
@@ -23,6 +24,10 @@ client.on('message', (message) => {
 
   if (command === 'ping') {
     channel.send('Pong.');
+  }
+
+  if (command === 'version') {
+    channel.send(`Current version: ${version}`);
   }
 
   if (command === 'hi') {
