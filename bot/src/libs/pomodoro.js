@@ -1,6 +1,6 @@
-const WORK_SESSION_DURATION = 30 * 1000; // 30 minutes
-const BREAK_DURATION = 10 * 1000; // 30 minutes
-const LONG_BREAK_DURATION = 20 * 60 * 1000; // 30 minutes
+const WORK_SESSION_DURATION = 30 * 60 * 1000; // 30 minutes
+const BREAK_DURATION = 10 * 60 * 1000; // 10 minutes
+const LONG_BREAK_DURATION = 20 * 60 * 1000; // 20 minutes
 const SESSION_BEFORE_LONG_BREAK = 4;
 
 const STATE = {
