@@ -35,8 +35,9 @@ async function handleStartCommand(channel) {
       type: 'session',
       duration: WORK_SESSION_DURATION,
     });
+    const dataBuffer = Buffer.from(data);
 
-    const messageId = await pubsub.topic(START_PERIOD_TOPIC).publish(data);
+    const messageId = await pubsub.topic(START_PERIOD_TOPIC).publish(dataBuffer);
     console.log(`Start session message ${messageId} published.`);
   }
 
@@ -55,8 +56,9 @@ async function handleStartCommand(channel) {
       type: 'break',
       duration: BREAK_DURATION,
     });
+    const dataBuffer = Buffer.from(data);
 
-    const messageId = await pubsub.topic(START_PERIOD_TOPIC).publish(data);
+    const messageId = await pubsub.topic(START_PERIOD_TOPIC).publish(dataBuffer);
     console.log(`Start break message ${messageId} published.`);
   }
 }
