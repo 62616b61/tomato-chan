@@ -1,20 +1,21 @@
-const Discord = require('discord.js');
+const { Client, Channel } = require('discord.js');
 const { hasPrefix, removePrefix } = require('./utils/prefix');
 const { handleStartCommand } = require('./libs/pomodoro');
 const { version } = require('../package.json');
 
 const TOKEN = process.env.TOKEN;
 
-const client = new Discord.Client();
+const client = new Client();
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
+
+  const channel = client.channels.get('466128199592706061');
+  channel.send(`I have been updated! My version is ${version} now.`)
 });
 
 client.on('message', async (message) => {
   const { content, channel } = message;
-
-  console.log('CHANNEL', channel)
 
   if (!hasPrefix(content)) return;
 
