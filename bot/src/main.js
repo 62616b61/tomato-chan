@@ -11,7 +11,7 @@ client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
 
-client.on('message', (message) => {
+client.on('message', async (message) => {
   const { content, channel } = message;
 
   if (!hasPrefix(content)) return;
@@ -19,7 +19,7 @@ client.on('message', (message) => {
   const command = removePrefix(content);
 
   if (command === 'start') {
-    handleStartCommand(channel);
+    await handleStartCommand(channel);
   }
 
   if (command === 'ping') {

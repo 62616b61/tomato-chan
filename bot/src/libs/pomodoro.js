@@ -20,7 +20,7 @@ let state = STATE.IDLE;
 let session = 1;
 let timer = null;
 
-function handleStartCommand(channel) {
+async function handleStartCommand(channel) {
   /*
    * If state is IDLE or BREAK_ENDED, then begin work session.
    */
