@@ -23,20 +23,15 @@ exports.startPeriod = (event, callback) => {
   console.log('FORMATTED PARENT', formattedParent)
   console.log('FORMATTED JOB NAME', formattedJobName)
 
-  const schedule = `${endDate.getMinutes()} ${endDate.getHours()} * * *`;
-  const dataBuffer = Buffer.from(JSON.stringify({
-    type,
-    channel,
-    job: formattedJobName,
-  }));
+  const schedule = '* * * * *';
 
   const job = {
     name: formattedJobName,
     schedule,
-    pubsubTarget: {
-      topic: PERIOD_ENDED_TOPIC,
-      data: dataBuffer,
-    },
+    httpTarget: {
+      uri: 'http://google.com',
+      httpMethod: 'GET',
+    }
   };
   const request = {
     parent: formattedParent,
