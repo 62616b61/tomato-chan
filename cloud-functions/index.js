@@ -18,12 +18,14 @@ exports.startPeriod = (event, callback) => {
   const scheduler = new Scheduler.v1beta1.CloudSchedulerClient();
   
   const formattedParent = scheduler.locationPath(process.env.GCLOUD_PROJECT, SCHEDULER_LOCATION);
+  const formattedName = scheduler.jobPath(process.env.GCLOUD_PROJECT, SCHEDULER_LOCATION, 'test-job-name');
 
   console.log('FORMATTED PARENT', formattedParent)
 
   const schedule = '* * * * *';
 
   const job = {
+    name: formattedName,
     schedule,
     httpTarget: {
       uri: 'http://google.com',
