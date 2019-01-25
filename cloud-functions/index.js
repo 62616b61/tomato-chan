@@ -36,7 +36,7 @@ exports.startPeriod = (event, callback) => {
     schedule,
     pubsubTarget: {
       topic: PERIOD_ENDED_TOPIC,
-      data: dataBuffer,
+      data: 'kek',
     },
   };
   const request = {
