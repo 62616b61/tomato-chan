@@ -18,7 +18,7 @@ exports.startPeriod = (event, callback) => {
   const scheduler = new Scheduler.v1beta1.CloudSchedulerClient();
   
   const formattedParent = scheduler.locationPath(process.env.GCLOUD_PROJECT, SCHEDULER_LOCATION);
-  const formattedJobName = scheduler.locationPath(process.env.GCLOUD_PROJECT, SCHEDULER_LOCATION, `${channel}-${duration}`);
+  const formattedJobName = scheduler.jobPath(process.env.GCLOUD_PROJECT, SCHEDULER_LOCATION, `${channel}-${duration}`);
 
   const schedule = `${endDate.getMinutes()} ${endDate.getHours()} * * *`;
   const dataBuffer = Buffer.from(JSON.stringify({
