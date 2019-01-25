@@ -1,7 +1,7 @@
 const Scheduler = require('@google-cloud/scheduler');
 
 const SCHEDULER_LOCATION = 'europe-west3';
-const PERIOD_ENDED_TOPIC = '/projects/tomato-chan/topics/period-ended';
+const PERIOD_ENDED_TOPIC = 'projects/tomato-chan/topics/period-ended';
 
 exports.startPeriod = (event, callback) => {
   const pubsubMessageRaw = event.data;
@@ -25,13 +25,19 @@ exports.startPeriod = (event, callback) => {
   console.log('FORMATTED NAME', formattedName)
   console.log('SCHEDULE', schedule)
 
+  const dataBuffer = Buffer.from(JSON.stringify({
+    type,
+    channel,
+    job: formattedName,
+  }));
+
   const job = {
     name: formattedName,
     schedule,
-    httpTarget: {
-      uri: 'http://google.com',
-      httpMethod: 'GET',
-    }
+    pubsubTarget: {
+      topic: PERIOD_ENDED_TOPIC,
+      data: dataBuffer,
+    },
   };
   const request = {
     parent: formattedParent,
