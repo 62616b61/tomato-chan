@@ -42,4 +42,8 @@ client.on('message', async (message) => {
   }
 });
 
+client.on('error', (err) => {
+  console.error('ERROR', err);
+});
+
 client.login(TOKEN);
