@@ -12,7 +12,7 @@ const STATE = {
   SESSION_ENDED: 2,
   BREAK_IN_PROGRESS: 3,
   BREAK_ENDED: 3,
-}
+};
 
 const pubsub = new PubSub();
 
@@ -33,6 +33,7 @@ async function handleStartCommand(channel) {
 
     const data = JSON.stringify({
       type: 'session',
+      date: new Date().toISOString(),
       channel: channel.id,
       duration: WORK_SESSION_DURATION,
     });
@@ -55,6 +56,7 @@ async function handleStartCommand(channel) {
 
     const data = JSON.stringify({
       type: 'break',
+      date: new Date().toISOString(),
       channel: channel.id,
       duration: BREAK_DURATION,
     });
