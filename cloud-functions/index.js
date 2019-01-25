@@ -38,7 +38,7 @@ exports.startPeriod = (event, callback) => {
     job: job,
   };
 
-  client.createJob(request)
+  scheduler.createJob(request)
     .then(responses => {
       const response = responses[0];
 
