@@ -25,26 +25,18 @@ exports.startPeriod = (event, callback) => {
   console.log('FORMATTED NAME', formattedName)
   console.log('SCHEDULE', schedule)
 
-  const dataBuffer = Buffer.from(JSON.stringify({
-    type,
-    channel,
-    job: formattedName,
-  })).toString('base64');
-
   const job = {
     name: formattedName,
     schedule,
-    pubsubTarget: {
-      topic: PERIOD_ENDED_TOPIC,
-      data: 'kek',
-    },
+    httpTarget: {
+      uri: 'http://google.com',
+      httpMethod: 'GET',
+    }
   };
   const request = {
     parent: formattedParent,
     job: job,
   };
-
-  console.log('submitting scheudle job')
 
   scheduler.createJob(request)
     .then(responses => {
@@ -55,7 +47,6 @@ exports.startPeriod = (event, callback) => {
       callback();
     })
     .catch(err => {
-      console.log('error')
       console.error(err);
       callback();
     });
