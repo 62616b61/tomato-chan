@@ -20,17 +20,18 @@ exports.startPeriod = (event, callback) => {
   const formattedParent = scheduler.locationPath(process.env.GCLOUD_PROJECT, SCHEDULER_LOCATION);
   const jobName = `${channel}-${duration}`;
   const schedule = `${endDate.getMinutes()} ${endDate.getHours()} * * *`;
+  const dataBuffer = Buffer.from(JSON.stringify({
+    type,
+    channel,
+    job: jobName,
+  }));
 
   const job = {
     name: jobName,
     schedule,
     pubsubTarget: {
       topic: PERIOD_ENDED_TOPIC,
-      data: JSON.stringify({
-        type,
-        channel,
-        job: jobName,
-      }),
+      data: dataBuffer,
     },
   };
   const request = {
