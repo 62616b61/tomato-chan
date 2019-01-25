@@ -31,7 +31,7 @@ exports.startPeriod = (event, callback) => {
   }));
 
   const job = {
-    name: formattedJobName,
+    name: '/' + formattedJobName,
     schedule,
     pubsubTarget: {
       topic: PERIOD_ENDED_TOPIC,
@@ -39,7 +39,7 @@ exports.startPeriod = (event, callback) => {
     },
   };
   const request = {
-    parent: formattedParent,
+    parent: '/' + formattedParent,
     job: job,
   };
 
