@@ -24,7 +24,7 @@ exports.startPeriod = (event, callback) => {
   const dataBuffer = Buffer.from(JSON.stringify({
     type,
     channel,
-    job: jobName,
+    job: formattedJobName,
   }));
 
   const job = {
