@@ -29,7 +29,7 @@ exports.startPeriod = (event, callback) => {
     type,
     channel,
     job: formattedName,
-  }));
+  })).toString('base64');
 
   const job = {
     name: formattedName,
