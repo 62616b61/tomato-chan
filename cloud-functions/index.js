@@ -20,6 +20,9 @@ exports.startPeriod = (event, callback) => {
   const formattedParent = scheduler.locationPath(process.env.GCLOUD_PROJECT, SCHEDULER_LOCATION);
   const formattedJobName = scheduler.jobPath(process.env.GCLOUD_PROJECT, SCHEDULER_LOCATION, `${channel}-${duration}`);
 
+  console.log('FORMATTED PARENT', formattedParent)
+  console.log('FORMATTED JOB NAME', formattedJobName)
+
   const schedule = `${endDate.getMinutes()} ${endDate.getHours()} * * *`;
   const dataBuffer = Buffer.from(JSON.stringify({
     type,
@@ -50,6 +53,7 @@ exports.startPeriod = (event, callback) => {
     })
     .catch(err => {
       console.error(err);
+      callback();
     });
 };
 
