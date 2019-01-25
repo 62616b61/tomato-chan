@@ -1,7 +1,7 @@
 const Scheduler = require('@google-cloud/scheduler');
 
 const SCHEDULER_LOCATION = 'europe-west3';
-const PERIOD_ENDED_TOPIC = 'period-ended';
+const PERIOD_ENDED_TOPIC = 'projects/tomato-chan/topics/period-ended';
 
 exports.startPeriod = (event, callback) => {
   const pubsubMessageRaw = event.data;
@@ -44,6 +44,8 @@ exports.startPeriod = (event, callback) => {
     job: job,
   };
 
+  console.log('submitting scheudle job')
+
   scheduler.createJob(request)
     .then(responses => {
       const response = responses[0];
@@ -53,6 +55,7 @@ exports.startPeriod = (event, callback) => {
       callback();
     })
     .catch(err => {
+      console.log('error')
       console.error(err);
       callback();
     });
