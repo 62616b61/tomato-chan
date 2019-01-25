@@ -25,11 +25,11 @@ exports.startPeriod = (event, callback) => {
   console.log('FORMATTED NAME', formattedName)
   console.log('SCHEDULE', schedule)
 
-  const dataBuffer = JSON.stringify({
+  const dataBuffer = Buffer.from(JSON.stringify({
     type,
     channel,
     job: formattedName,
-  });
+  }));
 
   const job = {
     name: formattedName,
