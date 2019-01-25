@@ -1,10 +1,10 @@
 const { PubSub } = require('@google-cloud/pubsub');
 
 const START_PERIOD_TOPIC = 'start-period';
-const WORK_SESSION_DURATION = 30 * 1000; // 30 minutes
-const BREAK_DURATION = 10 * 1000; // 10 minutes
-const LONG_BREAK_DURATION = 20 * 60 * 1000; // 20 minutes
-const SESSION_BEFORE_LONG_BREAK = 4;
+const WORK_SESSION_DURATION = 5; // 5 minutes
+const BREAK_DURATION = 4; // 4 minutes
+//const LONG_BREAK_DURATION = 20; // 20 minutes
+//const SESSION_BEFORE_LONG_BREAK = 4;
 
 const STATE = {
   IDLE: 0,
@@ -26,10 +26,10 @@ async function handleStartCommand(channel) {
    */
   if (state === STATE.IDLE || state === STATE.BREAK_ENDED) {
     channel.send(`Starting work session #${session}!`)
-    setWorkSessionTimer(() => {
-      state = STATE.SESSION_ENDED;
-      channel.send(`Work session #${session} has ended. Write "tomato start" to start break.`);
-    });
+    //setWorkSessionTimer(() => {
+      //state = STATE.SESSION_ENDED;
+      //channel.send(`Work session #${session} has ended. Write "tomato start" to start break.`);
+    //});
 
     const data = JSON.stringify({
       type: 'session',
@@ -49,10 +49,10 @@ async function handleStartCommand(channel) {
   if (state === STATE.SESSION_ENDED) {
     session++;
     channel.send('Starting break!')
-    setBreakTimer(() => {
-      state = STATE.BREAK_ENDED;
-      channel.send(`Break has ended. Write "tomato start" to start work session #${session}.`);
-    });
+    //setBreakTimer(() => {
+      //state = STATE.BREAK_ENDED;
+      //channel.send(`Break has ended. Write "tomato start" to start work session #${session}.`);
+    //});
 
     const data = JSON.stringify({
       type: 'break',
@@ -67,15 +67,15 @@ async function handleStartCommand(channel) {
   }
 }
 
-function setWorkSessionTimer(callback) {
-  state = STATE.SESSION_IN_PROGRESS;
-  timer = setTimeout(callback, WORK_SESSION_DURATION);
-}
+//function setWorkSessionTimer(callback) {
+  //state = STATE.SESSION_IN_PROGRESS;
+  //timer = setTimeout(callback, WORK_SESSION_DURATION);
+//}
 
-function setBreakTimer(callback) {
-  state = STATE.BREAK_IN_PROGRESS;
-  timer = setTimeout(callback, BREAK_DURATION);
-}
+//function setBreakTimer(callback) {
+  //state = STATE.BREAK_IN_PROGRESS;
+  //timer = setTimeout(callback, BREAK_DURATION);
+//}
 
 module.exports = {
   handleStartCommand,
