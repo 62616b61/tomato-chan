@@ -17,16 +17,13 @@ exports.startPeriod = (event, callback) => {
 
   const scheduler = new Scheduler.v1beta1.CloudSchedulerClient();
   
-  const formattedParent = '/projects/tomato-chan/locations/europe-west3';
-  const formattedJobName = '/projects/tomato-chan/locations/europe-west3/jobs/466128199592706061-5';
+  const formattedParent = scheduler.locationPath(process.env.GCLOUD_PROJECT, SCHEDULER_LOCATION);
 
   console.log('FORMATTED PARENT', formattedParent)
-  console.log('FORMATTED JOB NAME', formattedJobName)
 
   const schedule = '* * * * *';
 
   const job = {
-    name: formattedJobName,
     schedule,
     httpTarget: {
       uri: 'http://google.com',
