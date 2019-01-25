@@ -1,7 +1,7 @@
 const Scheduler = require('@google-cloud/scheduler');
 
 const SCHEDULER_LOCATION = 'europe-west3';
-const PERIOD_ENDED_TOPIC = 'projects/tomato-chan/topics/period-ended';
+const PERIOD_ENDED_TOPIC = '/projects/tomato-chan/topics/period-ended';
 
 exports.startPeriod = (event, callback) => {
   const pubsubMessageRaw = event.data;
