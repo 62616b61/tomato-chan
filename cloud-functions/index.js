@@ -18,7 +18,7 @@ exports.startPeriod = (event, callback) => {
   const scheduler = new Scheduler.v1beta1.CloudSchedulerClient();
   
   const formattedParent = scheduler.locationPath(process.env.GCLOUD_PROJECT, SCHEDULER_LOCATION);
-  const formattedName = scheduler.jobPath(process.env.GCLOUD_PROJECT, SCHEDULER_LOCATION, `tomato-channel-${channel}-${date}-${duration}`);
+  const formattedName = scheduler.jobPath(process.env.GCLOUD_PROJECT, SCHEDULER_LOCATION, `tomato-channel-${channel}-${duration}`);
   const schedule = `${endDate.getMinutes()} ${endDate.getHours()} * * *`;
 
   console.log('FORMATTED PARENT', formattedParent)
