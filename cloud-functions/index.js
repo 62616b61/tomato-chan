@@ -6,7 +6,7 @@ exports.startPeriod = (event, callback) => {
   console.log('INCOMING DATA', pubsubMessage);
 
   const startDate = new Date(date);
-  const endDate = new Date(startDate.getTime() + duration);
+  const endDate = new Date(startDate.getTime() + duration * 60 * 1000);
 
   console.log('Date', date)
   console.log('Start date', startDate.toISOString())
