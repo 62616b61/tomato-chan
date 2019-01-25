@@ -1,6 +1,6 @@
 exports.startPeriod = (event, callback) => {
   const pubsubMessageRaw = event.data;
-  const pubsubMessage = Buffer.from(pubsubMessage.data, 'base64').toString();
+  const pubsubMessage = Buffer.from(pubsubMessageRaw.data, 'base64').toString();
   const { type, date, duration } = JSON.parse(pubsubMessage);
 
   console.log('INCOMING DATA', pubsubMessage);
