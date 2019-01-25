@@ -10,3 +10,11 @@ steps:
   - startPeriod
   - --source=.
   - --trigger-topic=start-period
+- name: 'gcr.io/cloud-builders/gcloud'
+  dir: 'cloud-functions'
+  args:
+  - functions
+  - deploy
+  - periodEnded
+  - --source=.
+  - --trigger-topic=period-ended
